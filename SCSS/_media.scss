@@ -1,0 +1,50 @@
+
+@import 'variables';
+
+@media only screen and (max-width: 556px) {
+  header {
+    padding: 5px; 
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr; 
+    grid-template-rows:auto;
+    padding: 20px;
+    gap: 10px;
+    
+  }
+
+  .item1,
+  .item2,
+  .item3,
+  .item4,
+  .item5,
+  .item6,
+  .item7,
+  .item8 {
+    grid-column: 1; 
+  }
+
+  .item1,
+  .item3,
+  .item5,
+  .item7,
+  .item8 {
+    font-size: 40px; 
+  }
+
+  .buy-button {
+    font-size: 14px; 
+  }
+
+  footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+  }
+
+  .footer-container {
+    width: 100%; 
+    text-align: center; 
+  }
+}
