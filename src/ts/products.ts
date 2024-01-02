@@ -1,7 +1,5 @@
-import "./../scss/style.scss";
-import { Product } from "./models/Product";
-import { Size } from "./models/Size";
-
+import { Product } from "./Product";
+import { Size } from "./Size";
 
 
 const pant1: Product = new Product("001", "Casual Denim Jeans", "Comfortable denim jeans for a casual look.", "Jeans", 799, 1, [new Size("32/32"), new Size("33/33"), new Size("34/34")], "https://images.unsplash.com/photo-1516826957135-700dedea698c?q=80&w=1708&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
