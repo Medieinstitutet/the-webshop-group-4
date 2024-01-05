@@ -24,7 +24,8 @@ const shoe3: Product = new Product("019", "Summer Sandals", "Comfortable sandals
 const skirt1: Product = new Product("020", "Denim Skirt", "Versatile denim skirt for a trendy style.", "Skirts", 999, 1, [new Size("Small"), new Size("Medium"), new Size("Large")], "https://images.unsplash.com/photo-1573198567671-f17a7a75f206?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
 
 
-export let products:Product[] = [pant1, shoe1, shirt1, jacket1, wallet1, pant2, glasses1,
+ export let products:Product[] = [pant1, shoe1, shirt1, jacket1, wallet1, pant2, glasses1,
    shoe2, sweater1, bag1, pant3, shirt2, scarf1, bag2, hat1, suit1, blouse1, watch1, shoe3, skirt1];
+
 
 console.log(products);
