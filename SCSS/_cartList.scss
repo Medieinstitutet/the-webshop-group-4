@@ -1,0 +1,41 @@
+// _cartList.scss
+.cartPanel .cartList .unit img {
+  width: 100%;
+}
+
+.cartPanel .cartList .unit {
+  display: grid;
+  grid-template-columns: 40px 100px 40px 1fr;
+  gap: 10px;
+  text-align: center;
+  align-items: center;
+  margin: 10px;
+  height: 60px;
+}
+
+.cartList .amount span {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  color: black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.cartList .amount span:nth-child(2) {
+  background-color: transparent;
+  color: white;
+}
+
+.cartList .unit:nth-child(even) {
+  background-color: pink;
+}
+
+.cartList {
+  overflow: auto;
+}
+
+.cartList::-webkit-scrollbar {
+  width: 0;
+}

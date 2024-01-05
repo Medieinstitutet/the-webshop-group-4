@@ -1,0 +1,10 @@
+.productContainer {
+  width: 100%;
+  max-width: 90vw;
+  margin: auto;
+  text-align: center;
+  padding-top: 10px;
+  position: relative;
+  z-index: 1;
+  transition: margin-right 0.5s;
+}
