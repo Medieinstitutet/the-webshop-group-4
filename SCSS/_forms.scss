@@ -1,0 +1,12 @@
+
+.form-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.userInformation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: column;
+}

@@ -1,13 +1,3 @@
-.buy-button {
-  background-color: #000;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
 header {
   background-color: #fff;
   color: #000;
@@ -76,95 +66,113 @@ footer {
   opacity: 1;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 30px 80px;
-  grid-template-rows: auto;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
-.grid-container > div {
-  background-color: #eee;
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  max-width: 120px;
+  margin-right: 10px;
+}
+
+.checkoutContainer {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.large-text {
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+input,
+textarea {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.checkoutList .unit {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.checkoutList .unit img {
+  max-width: 80px;
+  margin-right: 20px;
+}
+
+.checkoutList .unit .info {
+  flex: 1;
+}
+
+.checkoutTotal {
+  text-align: right;
   font-size: 18px;
-  line-height: 1.5;
+  margin-top: 20px;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+.checkoutButton {
+  background-color: pink;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 800;
+  transition: background-color 0.3s;
+  align-self: flex-end;
 }
 
-.item1 {
-  grid-column: 1/3;
-  font-size: 120px;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+.checkoutButton:hover {
+  background-color: #0056b3;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.form-div {
   display: flex;
+  flex-direction: column;
 }
 
-.item2 {
+.userInformation {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 
-.item2 img {
-  max-width: 100%;
-  height: auto;
-}
-
-.item3 {
-  font-size: 120px;
-  font-family: cursive;
-  display: flex;
-}
-
-.item4 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.item4 img {
-  max-width: 100%;
-  max-height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-
-.item5 {
-  font-size: 150px;
-}
-
-.item6 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.item6 img {
-  max-width: 100%;
-  height: auto;
-}
-
-.item7 {
-  font-size: 120px;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  font-weight: 600;
-}
-
-.item8 {
-  font-size: 80px;
-  font-family: "Courier New", Courier, monospace;
-  font-style: italic;
+.buy-button {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 @media only screen and (max-width: 556px) {
@@ -206,18 +214,4 @@ img {
     width: 100%;
     text-align: center;
   }
-}
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo img {
-  max-width: 120px;
-  margin-right: 10px;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-}/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=checkout.css.map */
