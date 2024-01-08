@@ -1,20 +1,22 @@
+import { Product } from "./models/Product";
 import { products } from "./products";
+import { createdModalHtml } from "./services/modal";
 
-interface Product {
-  productId: string;
-  productName: string;
-  productDescription: string;
-  category: string;
-  price: number;
-  quantity: number;
-  sizes: { size: string }[];
-  imageUrl: string;
-}
+// interface Product {
+//   productId: string;
+//   productName: string;
+//   productDescription: string;
+//   category: string;
+//   price: number;
+//   quantity: number;
+//   sizes: { size: string }[];
+//   imageUrl: string;
+// }
 
 let cartIcon: Element | null = document.querySelector(".buyButton");
 let closeCart: Element | null = document.querySelector(".close");
 let body: Element | null = document.querySelector("body");
-
+  
 if (cartIcon && closeCart && body) {
   cartIcon.addEventListener("click", () => {
     if (body) {
@@ -54,8 +56,10 @@ const displayProduct = (products: Product[]) => {
         addToCart(product);
         updateCart();
       };
+      
       newProduct.appendChild(addToCartButton);
       productListHTML.appendChild(newProduct);
+
     });
   }
 };
@@ -190,3 +194,4 @@ cart = savedCart ? JSON.parse(savedCart) : [];
 
 // Display the cart
 updateCart();
+
