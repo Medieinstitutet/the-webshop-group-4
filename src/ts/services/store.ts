@@ -1,7 +1,6 @@
 import { Product } from "../models/Product";
 import { products } from "./products";
 
-
 let cartIcon: Element | null = document.querySelector(".buyButton");
 let closeCart: Element | null = document.querySelector(".close");
 let body: Element | null = document.querySelector("body");
@@ -18,26 +17,34 @@ if (cartIcon && closeCart && body) {
       body.classList.toggle("viewCart");
     }
   });
+
+  /*if (cartIcon) {
+  cartIcon.addEventListener("click", toggleCartView);
+}
+if (closeCart) {
+  closeCart.addEventListener("click", toggleCartView);
+}*/
 }
 
 let productLists: Product[] = products;
 let cart: Product[] = [];
 
+//Display products on the webpage
 const displayProduct = (products: Product[]) => {
   const productListHTML: Element | null =
     document.querySelector(".productList");
-
   if (productListHTML) {
     products.forEach((product) => {
       let newProduct: HTMLDivElement = document.createElement("div");
       newProduct.classList.add("unit");
+      newProduct.style.cursor = "pointer";
       newProduct.id = product.productId;
       newProduct.innerHTML = `
-        <img src="${product.imageUrl}" alt="" />
-        <h2>${product.productName}</h2>
-        <div class="price">${product.price}kr</div>
-      `;
-      // add to cart button
+          <img src="${product.imageUrl}" alt="" />
+          <h2>${product.productName}</h2>
+          <div class="price">${product.price}kr</div>`;
+
+      //Add to cart button
       let addToCartButton: HTMLButtonElement = document.createElement("button");
       addToCartButton.classList.add("addCart");
       addToCartButton.innerHTML = "Add";
@@ -52,8 +59,48 @@ const displayProduct = (products: Product[]) => {
   }
 };
 
-//  call to display products
+// call to display products
 displayProduct(productLists);
+
+// Products detail in another window.
+const productListContainer: Element | null =
+  document.querySelector(".productList");
+if (productListContainer) {
+  // 添加点击事件监听器到商品列表的父容器
+  productListContainer.addEventListener("click", (event: Event) => {
+    const target: Element = event.target as Element;
+
+    // 确保点击的是商品元素
+    if (target.classList.contains("unit")) {
+      // 获取商品的 ID
+      const productId: string | null = target.id;
+
+      // 根据商品 ID 获取商品详细信息
+      const selectedProduct: Product | undefined = productLists.find(
+        (product) => product.productId === productId
+      );
+
+      // 显示商品详细信息的窗口
+      if (selectedProduct) {
+        // 创建商品详细信息的窗口
+        const productDetailsWindow: Window | null = window.open("", "_blank");
+
+        if (productDetailsWindow) {
+          // 在新窗口中显示商品详细信息
+          productDetailsWindow.document.write(`
+            <link rel="stylesheet" type="text/css" href="/src/scss/productDetails.css">
+            <h2>${selectedProduct.productName}</h2>
+            <img src="${selectedProduct.imageUrl}" alt="" />
+            <p>${selectedProduct.productDescription}</p>
+            <p>Category: ${selectedProduct.category}</p>
+            <p>Price: ${selectedProduct.price}kr</p>
+      
+          `);
+        }
+      }
+    }
+  });
+}
 
 const addToCart = (product: Product) => {
   const existingProductIndex: number = cart.findIndex(
@@ -93,23 +140,19 @@ const updateCart = () => {
       let cartProductElement: HTMLDivElement = document.createElement("div");
       cartProductElement.classList.add("unit");
       cartProductElement.innerHTML = `
-            <div class="image">
-              <img src="${cartProduct.imageUrl}" alt="" />
-            </div>
-            <div class="name">${cartProduct.productName}</div>
-            <div class="totalPrice">${
-              cartProduct.price * cartProduct.quantity
-            }kr</div>
-            <div class="amount">
-              <span class="minus" data-productId="${
-                cartProduct.productId
-              }">-</span>
-              <span>${cartProduct.quantity}</span>
-              <span class="plus" data-productId="${
-                cartProduct.productId
-              }">+</span>
-            </div>
-          `;
+        <div class="image">
+         <img src="${cartProduct.imageUrl}" alt="" />
+        </div>
+        <div class="name">${cartProduct.productName}</div>
+        <div class="totalPrice">${
+          cartProduct.price * cartProduct.quantity
+        }kr</div>
+        <div class="amount">
+        <span class="minus" data-productId="${cartProduct.productId}">-</span>
+        <span>${cartProduct.quantity}</span>
+        <span class="plus" data-productId="${cartProduct.productId}">+</span>
+        </div>`;
+
       cartListHTML.appendChild(cartProductElement);
 
       // Update the total price and quantity
