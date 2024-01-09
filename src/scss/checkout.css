@@ -114,6 +114,9 @@ textarea {
   margin-bottom: 20px;
   border-bottom: 1px solid #e0e0e0;
   padding-bottom: 10px;
+  font-size: medium;
+  line-height: 30px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .checkoutList .unit img {
@@ -126,7 +129,8 @@ textarea {
 }
 
 .checkoutTotal {
-  text-align: right;
+  text-align: center;
+  font-weight: 700;
   font-size: 18px;
   margin-top: 20px;
 }
@@ -172,7 +176,7 @@ h1 {
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 @media only screen and (max-width: 556px) {
@@ -216,23 +220,6 @@ h1 {
     text-align: center;
   }
 }
-header .buyButton {
-  position: relative;
-}
-
-header .buyButton span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  background-color: red;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  top: 65%;
-  right: -5px;
-}
-
 .cartPanel {
   width: 300px;
   background-color: lightgray;
@@ -255,8 +242,7 @@ header .buyButton span {
 
 .cartPanel h1 {
   margin: 0;
-  padding: 25px;
-  font-weight: 400;
+  font-weight: 300;
   text-align: center;
   font-weight: 700;
 }
@@ -265,6 +251,7 @@ header .buyButton span {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   height: 50px;
+  width: 100%;
 }
 
 .cartPanel .btn button {
@@ -281,7 +268,7 @@ header .buyButton span {
 .totalPriceSidebar {
   text-align: right;
   color: #000000;
-  padding-right: 40px;
+  padding-right: 30px;
 }
 
 .cartPanel .btn {
@@ -290,13 +277,6 @@ header .buyButton span {
   text-decoration: none;
 }
 
-/*.cartPanel .btn button {
-  background-color: pink;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  color: white;
-}*/
 .cartPanel .btn .close {
   background-color: #FFC0CB;
   color: #fff;
@@ -313,12 +293,6 @@ header .buyButton span {
   color: #000000;
 }
 
-.buyButton {
-  background-color: #000000;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 16px;
+.logo img {
+  margin-left: 15px;
 }/*# sourceMappingURL=checkout.css.map */

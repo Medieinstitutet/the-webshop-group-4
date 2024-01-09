@@ -14,3 +14,13 @@ header .buyButton span {
   top: 65%;
   right: -5px;
 }
+
+.buyButton {
+  background-color:$black;
+  color: $white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+}

@@ -3,17 +3,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.productContainer {
-  width: 100%;
-  max-width: 90vw;
-  margin: auto;
-  text-align: center;
-  padding-top: 10px;
-  position: relative;
-  z-index: 1;
-  transition: margin-right 0.5s;
-}
-
 header {
   background-color: #fff;
   color: #000000;
@@ -23,6 +12,17 @@ header {
   align-items: center;
   border-bottom: 5px solid #000000;
   height: 50px;
+}
+
+.productContainer {
+  width: 100%;
+  max-width: 90vw;
+  margin: auto;
+  text-align: center;
+  padding-top: 10px;
+  position: relative;
+  z-index: 1;
+  transition: margin-right 0.5s;
 }
 
 .productList {
@@ -86,7 +86,7 @@ header {
 
 .cartPanel h1 {
   margin: 0;
-  font-weight: 400;
+  font-weight: 300;
   text-align: center;
   font-weight: 700;
 }
@@ -95,6 +95,7 @@ header {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   height: 50px;
+  width: 100%;
 }
 
 .cartPanel .btn button {
@@ -111,7 +112,7 @@ header {
 .totalPriceSidebar {
   text-align: right;
   color: #000000;
-  padding-right: 40px;
+  padding-right: 30px;
 }
 
 .cartPanel .cartList .unit img {
@@ -127,6 +128,7 @@ header {
   margin: 10px;
   margin-top: 30px;
   height: 60px;
+  font-size: 13px;
 }
 
 .cartList .amount span {
@@ -144,10 +146,6 @@ header {
   color: white;
 }
 
-.cartList .unit:nth-child(even) {
-  background-color: pink;
-}
-
 .cartList {
   overflow: auto;
 }
@@ -162,13 +160,6 @@ header {
   text-decoration: none;
 }
 
-/*.cartPanel .btn button {
-  background-color: pink;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  color: white;
-}*/
 .cartPanel .btn .close {
   background-color: #FFC0CB;
   color: #fff;
@@ -183,16 +174,6 @@ header {
 .cartPanel .btn .checkout a {
   text-decoration: none;
   color: #000000;
-}
-
-.buyButton {
-  background-color: #000000;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 16px;
 }
 
 .logo {
@@ -220,6 +201,16 @@ header .buyButton span {
   border-radius: 50%;
   top: 65%;
   right: -5px;
+}
+
+.buyButton {
+  background-color: #000000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 footer {
@@ -277,6 +268,14 @@ footer {
 
 .footer-inf a:hover {
   opacity: 1;
+}
+
+header {
+  height: 70px;
+}
+
+.logo img {
+  margin-left: 15px;
 }
 
 @media only screen and (max-width: 556px) {

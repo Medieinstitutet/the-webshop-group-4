@@ -4,10 +4,8 @@ let cart: Product[] = [];
 
 //declartion
 const displayCheckout = () => {
-  const checkoutListHTML: Element | null =
-    document.getElementById("checkoutList");
-  const checkoutTotalHTML: Element | null =
-    document.getElementById("checkoutTotal");
+  const checkoutListHTML: Element | null = document.getElementById("checkoutList");
+  const checkoutTotalHTML: Element | null = document.getElementById("checkoutTotal");
 
   //clean out everything to 0
   if (checkoutListHTML && checkoutTotalHTML) {
@@ -21,8 +19,7 @@ const displayCheckout = () => {
 
     // Use forEach to reach every cart items and create new div, unit to show in the page. use appendChild to make sure every childran come with.
     filteredCart.forEach((cartProduct) => {
-      let checkoutProductElement: HTMLDivElement =
-        document.createElement("div");
+      let checkoutProductElement: HTMLDivElement = document.createElement("div");
       checkoutProductElement.classList.add("unit");
       checkoutProductElement.innerHTML = `
         <div class="image">
@@ -30,14 +27,8 @@ const displayCheckout = () => {
         </div>
         <div class="info">
           <div class="name">${cartProduct.productName}</div>
-          <div class="totalPrice">${
-            cartProduct.price * cartProduct.quantity
-          }kr</div>
-          <div class="quantity">
-           
-            <span>${cartProduct.quantity}</span>
-            
-          </div>
+          <div class="totalPrice">${cartProduct.price * cartProduct.quantity}kr</div>
+          <div class="quantity"><span>${cartProduct.quantity}st</span></div>
         </div>
       `;
       checkoutListHTML.appendChild(checkoutProductElement);

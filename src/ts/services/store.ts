@@ -17,13 +17,6 @@ if (cartIcon && closeCart && body) {
       body.classList.toggle("viewCart");
     }
   });
-
-  /*if (cartIcon) {
-  cartIcon.addEventListener("click", toggleCartView);
-}
-if (closeCart) {
-  closeCart.addEventListener("click", toggleCartView);
-}*/
 }
 
 let productLists: Product[] = products;
@@ -66,27 +59,27 @@ displayProduct(productLists);
 const productListContainer: Element | null =
   document.querySelector(".productList");
 if (productListContainer) {
-  // 添加点击事件监听器到商品列表的父容器
+  // Add a click event listener to the parent container of the product list.
   productListContainer.addEventListener("click", (event: Event) => {
     const target: Element = event.target as Element;
 
-    // 确保点击的是商品元素
+    // Ensure that the clicked element is a product item.
     if (target.classList.contains("unit")) {
-      // 获取商品的 ID
+      // Get the ID of the clicked product.
       const productId: string | null = target.id;
 
-      // 根据商品 ID 获取商品详细信息
+      // Retrieve detailed information about the product based on its ID.
       const selectedProduct: Product | undefined = productLists.find(
         (product) => product.productId === productId
       );
 
-      // 显示商品详细信息的窗口
+      // Display the window with detailed product information.
       if (selectedProduct) {
-        // 创建商品详细信息的窗口
+        // Create a window for displaying detailed product information.
         const productDetailsWindow: Window | null = window.open("", "_blank");
 
         if (productDetailsWindow) {
-          // 在新窗口中显示商品详细信息
+          // Display product details in the new window.
           productDetailsWindow.document.write(`
             <link rel="stylesheet" type="text/css" href="/src/scss/productDetails.css">
             <h2>${selectedProduct.productName}</h2>
@@ -108,15 +101,13 @@ const addToCart = (product: Product) => {
   );
 
   if (existingProductIndex !== -1) {
-    // Product already in the cart, increase quantity
+  // Product already in the cart, increase quantity
     cart[existingProductIndex].quantity += 1;
   } else {
-    // Add the product to the cart with quantity 1
+  // Add the product to the cart with quantity 1
     cart.push({ ...product, quantity: 1 });
   }
-
   // Save the updated cart in local storage
-
   localStorage.setItem("cart", JSON.stringify(cart));
 };
 
@@ -144,9 +135,7 @@ const updateCart = () => {
          <img src="${cartProduct.imageUrl}" alt="" />
         </div>
         <div class="name">${cartProduct.productName}</div>
-        <div class="totalPrice">${
-          cartProduct.price * cartProduct.quantity
-        }kr</div>
+        <div class="totalPrice">${cartProduct.price * cartProduct.quantity}kr</div>
         <div class="amount">
         <span class="minus" data-productId="${cartProduct.productId}">-</span>
         <span>${cartProduct.quantity}</span>
@@ -202,7 +191,6 @@ document.addEventListener("click", (event: Event) => {
 });
 
 // Load the cart from local storage
-
 const savedCart = localStorage.getItem("cart");
 cart = savedCart ? JSON.parse(savedCart) : [];
 

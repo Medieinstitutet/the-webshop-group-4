@@ -5,10 +5,13 @@
 @import 'container';
 @import 'media';
 @import 'logo';
+@import 'shoppingbagButton';
 
 
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
   color: $black;
+}
+.buyButton {
+  font-size: 20px;
 }

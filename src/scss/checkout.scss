@@ -5,11 +5,11 @@
 @import 'logo';
 @import 'layout';
 @import 'forms';
-@import 'button';
+@import 'shoppingbagButton';
 @import 'media';
-@import 'buybutton';
 @import 'cartPanel';
 @import 'cartPanelButton';
 
-
- 
+.logo img {
+  margin-left: 15px;
+}

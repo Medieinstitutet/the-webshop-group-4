@@ -21,7 +21,7 @@
 
 .cartPanel h1 {
   margin: 0;
-  font-weight: 400;
+  font-weight: 300;
   text-align: center;
   font-weight: 700;
 }
@@ -30,6 +30,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   height: 50px;
+  width: 100%;
 }
 
 .cartPanel .btn button {
@@ -46,5 +47,5 @@
 .totalPriceSidebar {
   text-align: right;
   color: $black;
-  padding-right: 40px;
+  padding-right: 30px;
 }
