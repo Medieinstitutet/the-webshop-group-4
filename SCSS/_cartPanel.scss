@@ -1,4 +1,4 @@
-// _cartPanel.scss
+
 .cartPanel {
   width: 300px;
   background-color: lightgray;
@@ -23,6 +23,8 @@
   margin: 0;
   padding: 25px;
   font-weight: 400;
+  text-align: center;
+  font-weight: 700;
 }
 
 .cartPanel .btn {
@@ -40,4 +42,10 @@
 
 .cartPanel .btn .close {
   background-color: yellow;
+}
+
+.totalPriceSidebar {
+  text-align: right;
+  color: $black;
+  padding-right: 40px;
 }

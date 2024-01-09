@@ -1,13 +1,15 @@
-// _productList.scss
+
 .productList {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 30px;
+  margin: 20px;
 }
 
 .productList .unit {
   background-color: #eee;
   padding: 10px;
+  height: 400px;
 }
 
 .productList .unit img {

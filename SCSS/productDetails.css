@@ -1,0 +1,19 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  text-align: center;
+  border: 10px solid black;
+}
+
+h2 {
+  color: #333;
+}
+
+img {
+  max-width: 30%;
+  height: auto;
+}
+
+p {
+  margin-bottom: 10px;
+}/*# sourceMappingURL=productDetails.css.map */
