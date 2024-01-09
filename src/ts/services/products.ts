@@ -204,12 +204,16 @@ const skirt1: Product = new Product(
 
 export let products: Product[] = [
   pant1,
+  pant2,
+  jacket1,
+  glasses1,
+  suit1,
+  watch1,
+  skirt1,
+  hat1,
   shoe1,
   shirt1,
-  jacket1,
   wallet1,
-  pant2,
-  glasses1,
   shoe2,
   sweater1,
   bag1,
@@ -217,12 +221,8 @@ export let products: Product[] = [
   shirt2,
   scarf1,
   bag2,
-  hat1,
-  suit1,
   blouse1,
-  watch1,
   shoe3,
-  skirt1,
 ];
 
 console.log(products);
