@@ -1,15 +1,6 @@
+import { Product } from "./models/Product";
 import { products } from "./products";
 
-interface Product {
-  productId: string;
-  productName: string;
-  productDescription: string;
-  category: string;
-  price: number;
-  quantity: number;
-  sizes: { size: string }[];
-  imageUrl: string;
-}
 
 let cartIcon: Element | null = document.querySelector(".buyButton");
 let closeCart: Element | null = document.querySelector(".close");
@@ -27,124 +18,157 @@ if (cartIcon && closeCart && body) {
       body.classList.toggle("viewCart");
     }
   });
+
+  /*if (cartIcon) {
+  cartIcon.addEventListener("click", toggleCartView);
+}
+if (closeCart) {
+  closeCart.addEventListener("click", toggleCartView);
+}*/
+
 }
 
 let productLists: Product[] = products;
 let cart: Product[] = [];
 
-const displayProduct = (products: Product[]) => {
-  const productListHTML: Element | null =
-    document.querySelector(".productList");
 
-  if (productListHTML) {
-    products.forEach((product) => {
-      let newProduct: HTMLDivElement = document.createElement("div");
-      newProduct.classList.add("unit");
-      newProduct.id = product.productId;
-      newProduct.innerHTML = `
-        <img src="${product.imageUrl}" alt="" />
-        <h2>${product.productName}</h2>
-        <div class="price">${product.price}kr</div>
-      `;
-  // add to cart button
-      let addToCartButton: HTMLButtonElement = document.createElement("button");
-      addToCartButton.classList.add("addCart");
-      addToCartButton.innerHTML = "Add";
-      addToCartButton.onclick = () => {
-        addToCart(product);
-        updateCart();
-      };
-      newProduct.appendChild(addToCartButton);
-      productListHTML.appendChild(newProduct);
+//Display products on the webpage
+const displayProduct = (products: Product[]) => {
+  const productListHTML: Element | null = document.querySelector(".productList");
+      if (productListHTML) {
+        products.forEach((product) => {
+          let newProduct: HTMLDivElement = document.createElement("div");
+          newProduct.classList.add("unit");
+          newProduct.style.cursor = "pointer";
+          newProduct.id = product.productId;
+          newProduct.innerHTML = `
+          <img src="${product.imageUrl}" alt="" />
+          <h2>${product.productName}</h2>
+          <div class="price">${product.price}kr</div>`;
+
+//Add to cart button
+let addToCartButton: HTMLButtonElement = 
+  document.createElement("button");
+    addToCartButton.classList.add("addCart");
+    addToCartButton.innerHTML = "Add";
+    addToCartButton.onclick = () => {
+      addToCart(product);
+      updateCart();
+     };
+     newProduct.appendChild(addToCartButton);
+     productListHTML.appendChild(newProduct);
     });
   }
 };
 
-//  call to display products
+// call to display products
 displayProduct(productLists);
 
+// Products detail in another window.
+const productListContainer: Element | null = document.querySelector(".productList");
+if (productListContainer) {
+  // 添加点击事件监听器到商品列表的父容器
+  productListContainer.addEventListener("click", (event: Event) => {
+    const target: Element = event.target as Element;
+    
+    // 确保点击的是商品元素
+    if (target.classList.contains("unit")) {
+      // 获取商品的 ID
+      const productId: string | null = target.id;
+      
+      // 根据商品 ID 获取商品详细信息
+      const selectedProduct: Product | undefined = productLists.find(product => product.productId === productId);
 
+      // 显示商品详细信息的窗口
+      if (selectedProduct) {
+        // 创建商品详细信息的窗口
+        const productDetailsWindow: Window | null = window.open("", "_blank");
 
-
-
-
-
+        if (productDetailsWindow) {
+          // 在新窗口中显示商品详细信息
+          productDetailsWindow.document.write(`
+            <link rel="stylesheet" type="text/css" href="/SCSS/productDetails.css">
+            <h2>${selectedProduct.productName}</h2>
+            <img src="${selectedProduct.imageUrl}" alt="" />
+            <p>${selectedProduct.productDescription}</p>
+            <p>Category: ${selectedProduct.category}</p>
+            <p>Price: ${selectedProduct.price}kr</p>
+      
+          `);
+        }
+      }
+    }
+  });
+}
 
 const addToCart = (product: Product) => {
   const existingProductIndex: number = cart.findIndex(
     (cartProduct) => cartProduct.productId === product.productId
-  );
-
+    );
   if (existingProductIndex !== -1) {
-    // Product already in the cart, increase quantity
+// Product already in the cart, increase quantity
     cart[existingProductIndex].quantity += 1;
   } else {
-    // Add the product to the cart with quantity 1
+// Add the product to the cart with quantity 1
     cart.push({ ...product, quantity: 1 });
   }
-
-   // Save the updated cart in local storage
-
+// Save the updated cart in local storage
    localStorage.setItem("cart", JSON.stringify(cart));
   };
   
 
-
-  const updateCart = () => {
-      const cartListHTML: Element | null = document.querySelector(".cartList");
-      const totalPriceSidebar: Element | null = document.getElementById("cartTotalPrice");
-      const cartQuantityHeader: Element | null = document.getElementById("cartQuantity");
+const updateCart = () => {
+  const cartListHTML: Element | null = 
+    document.querySelector(".cartList");
+  const totalPriceSidebar: Element | null = 
+    document.getElementById("cartTotalPrice");
+  const cartQuantityHeader: Element | null = 
+    document.getElementById("cartQuantity");
     
-      if (cartListHTML && totalPriceSidebar && cartQuantityHeader) {
-        cartListHTML.innerHTML = '';
-        let total = 0;
-        let quantity = 0;
+  if (cartListHTML && totalPriceSidebar && cartQuantityHeader) {
+    cartListHTML.innerHTML = '';
+  let total = 0;
+  let quantity = 0;
     
-        // Filter out products with zero quantity
-        const filteredCart = cart.filter((cartProduct) => cartProduct.quantity > 0);
+// Filter out products with zero quantity
+  const filteredCart = cart.filter((cartProduct) => 
+         cartProduct.quantity > 0);
     
-        // Loop through each product in the  cart panel
-        filteredCart.forEach((cartProduct) => {
-          let cartProductElement: HTMLDivElement = document.createElement("div");
-          cartProductElement.classList.add("unit");
-          cartProductElement.innerHTML = `
-            <div class="image">
-              <img src="${cartProduct.imageUrl}" alt="" />
-            </div>
-            <div class="name">${cartProduct.productName}</div>
-            <div class="totalPrice">${cartProduct.price * cartProduct.quantity}kr</div>
-            <div class="amount">
-              <span class="minus" data-productId="${cartProduct.productId}">-</span>
-              <span>${cartProduct.quantity}</span>
-              <span class="plus" data-productId="${cartProduct.productId}">+</span>
-            </div>
-          `;
-          cartListHTML.appendChild(cartProductElement);
+// Loop through each product in the  cart panel
+  filteredCart.forEach((cartProduct) => {
+    let cartProductElement: HTMLDivElement = 
+      document.createElement("div");
+      cartProductElement.classList.add("unit");
+      cartProductElement.innerHTML = `
+        <div class="image">
+         <img src="${cartProduct.imageUrl}" alt="" />
+        </div>
+        <div class="name">${cartProduct.productName}</div>
+        <div class="totalPrice">${cartProduct.price * cartProduct.quantity}kr</div>
+        <div class="amount">
+        <span class="minus" data-productId="${cartProduct.productId}">-</span>
+        <span>${cartProduct.quantity}</span>
+        <span class="plus" data-productId="${cartProduct.productId}">+</span>
+        </div>`;
+        
+      cartListHTML.appendChild(cartProductElement);
  
+// Update the total price and quantity
+  total += cartProduct.price * cartProduct.quantity;
+  quantity += cartProduct.quantity;
+  });
   
-        // Update the total price and quantity
-        total += cartProduct.price * cartProduct.quantity;
-        quantity += cartProduct.quantity;
-      });
+// Display the total price in the cart sidebar
+  totalPriceSidebar.textContent = `${total}kr`;
   
-      // Display the total price in the cart sidebar
-      totalPriceSidebar.textContent = `${total}kr`;
-  
-      // Display the quantity in the header
-      cartQuantityHeader.textContent = `${quantity}`;
-    }
+// Display the quantity in the header
+  cartQuantityHeader.textContent = `${quantity}`;
+ }
 };
-
-
-
-
-
-
-  
 
 // Event listener for the increase/decrease buttons in the cart 
 document.addEventListener("click", (event: Event) => {
-    let target: Element = event.target as Element;
+  let target: Element = event.target as Element;
   
     if (target.classList.contains("plus") || target.classList.contains("minus")) {
       const productId: string | null = target.getAttribute("data-productId");
@@ -152,41 +176,32 @@ document.addEventListener("click", (event: Event) => {
         (product) => product.productId === productId
       );
   
-      if (selectedProductIndex !== -1 ) {
-        if (target.classList.contains("plus")) {
-          // Increase quantity
-          cart[selectedProductIndex].quantity += 1;
-        } else if (target.classList.contains("minus")) {
-          // Decrease quantity, remove if it becomes 0
-          if (cart[selectedProductIndex].quantity > 1) {
+    if (selectedProductIndex !== -1 ) {
+      if (target.classList.contains("plus")) {
+// Increase quantity
+        cart[selectedProductIndex].quantity += 1;
+      } else if (target.classList.contains("minus")) {
+// Decrease quantity, remove if it becomes 0
+      if (cart[selectedProductIndex].quantity > 1) {
             cart[selectedProductIndex].quantity -= 1;
-          } else {
-            // Remove the product if quantity is 0
-            cart.splice(selectedProductIndex, 1);
+      } else {
+// Remove the product if quantity is 0
+          cart.splice(selectedProductIndex, 1);
           }
         }
 
-
+// Update the cart display
+ updateCart();
   
-        // Update the cart display
-        updateCart();
-  
-
-
-        // Save the updated cart in local storage
-        localStorage.setItem("cart", JSON.stringify(cart));
+// Save the updated cart in local storage
+ localStorage.setItem("cart", JSON.stringify(cart));
       }
     }
   });
 
-
-
-
-
 // Load the cart from local storage
-
 const savedCart = localStorage.getItem("cart");
 cart = savedCart ? JSON.parse(savedCart) : [];
 
-// Display the cart
-updateCart();
+
+
