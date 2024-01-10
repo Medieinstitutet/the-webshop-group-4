@@ -2,25 +2,32 @@ import { Product } from "../models/Product";
 
 let cart: Product[] = [];
 
-//declartion
+// Display shopping items for check out.
 const displayCheckout = () => {
+  // Get references to HTML elements 
   const checkoutListHTML: Element | null = document.getElementById("checkoutList");
   const checkoutTotalHTML: Element | null = document.getElementById("checkoutTotal");
 
-  //clean out everything to 0
+  // Check if both elements are found in the HTML
   if (checkoutListHTML && checkoutTotalHTML) {
+    // Clear the content of the checkoutListHTML
     checkoutListHTML.innerHTML = "";
+
+    // Initialize a variable to keep track of the total cost
     let total = 0;
 
-    // use filter to find every quantiy which is bigger than 0
+    // Filter the cart array to include only products with a quantity greater than 0
     const filteredCart = cart.filter(function (cartProduct) {
       return cartProduct.quantity > 0;
     });
 
-    // Use forEach to reach every cart items and create new div, unit to show in the page. use appendChild to make sure every childran come with.
+    // Iterate over each product in the filteredCart array
     filteredCart.forEach((cartProduct) => {
+      // Create a new <div> element for each product in the checkout list
       let checkoutProductElement: HTMLDivElement = document.createElement("div");
-      checkoutProductElement.classList.add("unit");
+      checkoutProductElement.classList.add("unit"); // Add the class "unit" to the new <div>
+      
+      // Set the inner HTML of the checkoutProductElement with product information
       checkoutProductElement.innerHTML = `
         <div class="image">
           <img src="${cartProduct.imageUrl}" alt="" />
@@ -31,13 +38,15 @@ const displayCheckout = () => {
           <div class="quantity"><span>${cartProduct.quantity}st</span></div>
         </div>
       `;
+
+      // Append the checkoutProductElement to the checkoutListHTML
       checkoutListHTML.appendChild(checkoutProductElement);
 
-      // Update the total price
+      // Update the total cost by adding the cost of the current product
       total = total + cartProduct.price * cartProduct.quantity;
     });
 
-    //total price in the checkout page
+    // Set the text content of checkoutTotalHTML to display the total cost
     checkoutTotalHTML.textContent = `Total: ${total}kr`;
   }
 };

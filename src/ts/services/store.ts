@@ -1,63 +1,67 @@
 import { Product } from "../models/Product";
 import { products } from "./products";
 
+// Open and close the Cart.
+// Get references to HTML elements
 let cartIcon: Element | null = document.querySelector(".buyButton");
 let closeCart: Element | null = document.querySelector(".close");
 let body: Element | null = document.querySelector("body");
-
-if (cartIcon && closeCart && body) {
-  cartIcon.addEventListener("click", () => {
-    if (body) {
-      body.classList.toggle("viewCart");
-    }
-  });
-
-  closeCart.addEventListener("click", () => {
-    if (body) {
-      body.classList.toggle("viewCart");
-    }
-  });
-}
+// Add a click event listener to the cartIcon element, toggling the "viewCart" class on the body element
+cartIcon && cartIcon.addEventListener("click", () => {
+  body && body.classList.toggle("viewCart");
+});
+// Add a click event listener to the closeCart element, toggling the "viewCart" class on the body element
+closeCart && closeCart.addEventListener("click", () => {
+  body && body.classList.toggle("viewCart");
+});
 
 let productLists: Product[] = products;
 let cart: Product[] = [];
 
-//Display products on the webpage
+// Display products on the webpage.
 const displayProduct = (products: Product[]) => {
-  const productListHTML: Element | null =
-    document.querySelector(".productList");
-  if (productListHTML) {
-    products.forEach((product) => {
-      let newProduct: HTMLDivElement = document.createElement("div");
-      newProduct.classList.add("unit");
-      newProduct.style.cursor = "pointer";
-      newProduct.id = product.productId;
-      newProduct.innerHTML = `
-          <img src="${product.imageUrl}" alt="" />
-          <h2>${product.productName}</h2>
-          <div class="price">${product.price}kr</div>`;
+  // Get the reference to the HTML element with the class "productList"
+  const productListHTML = document.querySelector(".productList");
 
-      //Add to cart button
-      let addToCartButton: HTMLButtonElement = document.createElement("button");
-      addToCartButton.classList.add("addCart");
-      addToCartButton.innerHTML = "Add";
-      addToCartButton.onclick = () => {
-        addToCart(product);
-        updateCart();
-      };
+  // Iterate over each product in the array
+  products.forEach((product) => {
+    // Create a new <div> element for each product
+    const newProduct = document.createElement("div");
+    newProduct.classList.add("unit"); // Add the class "unit" to the new <div>
+    newProduct.style.cursor = "pointer"; // Set the cursor style to "pointer"
+    newProduct.id = product.productId; // Set the ID of the new <div> to the product's ID
+    newProduct.innerHTML = `
+      <img src="${product.imageUrl}" alt="" />
+      <h2>${product.productName}</h2>
+      <div class="price">${product.price}kr</div>`;
 
-      newProduct.appendChild(addToCartButton);
-      productListHTML.appendChild(newProduct);
+    // Create an "Add to Cart" button for each product
+    const addToCartButton = document.createElement("button");
+    addToCartButton.classList.add("addCart"); // Add the class "addCart" to the button
+    addToCartButton.innerHTML = "Add"; // Set the button text to "Add"
+
+    // Add a click event listener to the "Add to Cart" button
+    addToCartButton.addEventListener("click", () => {
+      // Call the addToCart function with the current product
+      addToCart(product);
+      // Call the updateCart function
+      updateCart();
     });
-  }
+
+    // Append the "Add to Cart" button to the new product <div>
+    newProduct.appendChild(addToCartButton);
+
+    // Append the new product <div> to the product list HTML element. Using the ! operator to telling TypeScript that you are sure the variable is not null or undefined
+    productListHTML!.appendChild(newProduct);
+  });
 };
 
-// call to display products
+// Call to display products
 displayProduct(productLists);
 
-// Products detail in another window.
-const productListContainer: Element | null =
-  document.querySelector(".productList");
+// Show products detail in another window.
+// Get references to HTML elements
+const productListContainer: Element | null = document.querySelector(".productList");
 if (productListContainer) {
   // Add a click event listener to the parent container of the product list.
   productListContainer.addEventListener("click", (event: Event) => {
@@ -95,30 +99,37 @@ if (productListContainer) {
   });
 }
 
+// Add to the cart
 const addToCart = (product: Product) => {
+  // Find the index of the existing product in the cart array
   const existingProductIndex: number = cart.findIndex(
     (cartProduct) => cartProduct.productId === product.productId
   );
 
-  if (existingProductIndex !== -1) {
-  // Product already in the cart, increase quantity
-    cart[existingProductIndex].quantity += 1;
-  } else {
-  // Add the product to the cart with quantity 1
-    cart.push({ ...product, quantity: 1 });
-  }
+// Check if the existing product is found in the cart (index is not -1)
+existingProductIndex !== -1 &&
+// If the product is found, increment its quantity in the cart
+(cart[existingProductIndex].quantity += 1);
+
+// Check if the existing product is not found in the cart (index is -1)
+existingProductIndex === -1 &&
+// If the product is not found, add a new product to the cart with a quantity of 1
+cart.push({ ...product, quantity: 1 });
+
+
   // Save the updated cart in local storage
   localStorage.setItem("cart", JSON.stringify(cart));
 };
 
+// Update the ccart.
 const updateCart = () => {
+  // Get references to HTML elements
   const cartListHTML: Element | null = document.querySelector(".cartList");
-  const totalPriceSidebar: Element | null =
-    document.getElementById("cartTotalPrice");
-  const cartQuantityHeader: Element | null =
-    document.getElementById("cartQuantity");
+  const totalPriceSidebar: Element | null = document.getElementById("cartTotalPrice");
+  const cartQuantityHeader: Element | null = document.getElementById("cartQuantity");
 
-  if (cartListHTML && totalPriceSidebar && cartQuantityHeader) {
+  // Execute subsequent operations only if all elements are truthy
+  (cartListHTML && totalPriceSidebar && cartQuantityHeader) && (() => {
     cartListHTML.innerHTML = "";
     let total = 0;
     let quantity = 0;
@@ -126,22 +137,23 @@ const updateCart = () => {
     // Filter out products with zero quantity
     const filteredCart = cart.filter((cartProduct) => cartProduct.quantity > 0);
 
-    // Loop through each product in the  cart panel
+    // Loop through each product in the cart panel
     filteredCart.forEach((cartProduct) => {
       let cartProductElement: HTMLDivElement = document.createElement("div");
       cartProductElement.classList.add("unit");
       cartProductElement.innerHTML = `
         <div class="image">
-         <img src="${cartProduct.imageUrl}" alt="" />
+          <img src="${cartProduct.imageUrl}" alt="" />
         </div>
         <div class="name">${cartProduct.productName}</div>
         <div class="totalPrice">${cartProduct.price * cartProduct.quantity}kr</div>
         <div class="amount">
-        <span class="minus" data-productId="${cartProduct.productId}">-</span>
-        <span>${cartProduct.quantity}</span>
-        <span class="plus" data-productId="${cartProduct.productId}">+</span>
+          <span class="minus" data-productId="${cartProduct.productId}">-</span>
+          <span>${cartProduct.quantity}</span>
+          <span class="plus" data-productId="${cartProduct.productId}">+</span>
         </div>`;
 
+      // Use nullish coalescing to handle potential null or undefined values
       cartListHTML.appendChild(cartProductElement);
 
       // Update the total price and quantity
@@ -154,41 +166,51 @@ const updateCart = () => {
 
     // Display the quantity in the header
     cartQuantityHeader.textContent = `${quantity}`;
-  }
+  })();
 };
 
-// Event listener for the increase/decrease buttons in the cart
+
+// Increase/decrease in the cart.
 document.addEventListener("click", (event: Event) => {
-  let target: Element = event.target as Element;
+  const target: Element = event.target as Element;
+  const classList = target.classList;
+  const productId: string | null = target.getAttribute("data-productId");
+  const selectedProductIndex: number = cart.findIndex(
+    (product) => product.productId === productId
+  );
 
-  if (target.classList.contains("plus") || target.classList.contains("minus")) {
-    const productId: string | null = target.getAttribute("data-productId");
-    const selectedProductIndex: number = cart.findIndex(
-      (product) => product.productId === productId
-    );
-
-    if (selectedProductIndex !== -1) {
-      if (target.classList.contains("plus")) {
-        // Increase quantity
-        cart[selectedProductIndex].quantity += 1;
-      } else if (target.classList.contains("minus")) {
-        // Decrease quantity, remove if it becomes 0
-        if (cart[selectedProductIndex].quantity > 1) {
-          cart[selectedProductIndex].quantity -= 1;
-        } else {
-          // Remove the product if quantity is 0
-          cart.splice(selectedProductIndex, 1);
-        }
-      }
-
-      // Update the cart display
-      updateCart();
-
-      // Save the updated cart in local storage
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
+  if (
+    classList.contains("plus") &&
+    selectedProductIndex !== -1
+  ) {
+    // Increase quantity
+    cart[selectedProductIndex].quantity += 1;
+  } else if (
+    classList.contains("minus") &&
+    selectedProductIndex !== -1 &&
+    cart[selectedProductIndex].quantity > 1
+  ) {
+    // Decrease quantity, remove if it becomes 0
+    cart[selectedProductIndex].quantity -= 1;
+  } else if (
+    classList.contains("minus") &&
+    selectedProductIndex !== -1 &&
+    cart[selectedProductIndex].quantity === 1
+  ) {
+    // Remove the product if quantity is 1
+    cart.splice(selectedProductIndex, 1);
+  } else {
+    // Do nothing for other classes or conditions
+    return;
   }
+
+  // Update the cart display
+  updateCart();
+
+  // Save the updated cart in local storage
+  localStorage.setItem("cart", JSON.stringify(cart));
 });
+
 
 // Load the cart from local storage
 const savedCart = localStorage.getItem("cart");
