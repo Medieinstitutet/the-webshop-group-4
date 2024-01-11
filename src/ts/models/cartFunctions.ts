@@ -1,16 +1,12 @@
-// cartFunctions.ts
 import { Product } from "../models/Product";
-
 
 export const addToCart = (product:Product, cart: Product[]) => {
   const existingProductIndex: number = cart.findIndex(
     (cartProduct) => cartProduct.productId === product.productId
   );
-
   existingProductIndex !== -1 && (cart[existingProductIndex].quantity += 1);
 
-  existingProductIndex === -1 &&
-    cart.push({ ...product, quantity: 1 });
+  existingProductIndex === -1 && cart.push({ ...product, quantity: 1 });
 
   localStorage.setItem("cart", JSON.stringify(cart));
 };
@@ -56,7 +52,6 @@ export const saveCart = (cart: Product[]) => {
   localStorage.setItem("cart", JSON.stringify(cart));
 };
 
-// increaseDecrease.ts
 export const increaseDecrease = (cart: Product[]) => {
   document.addEventListener("click", (event: Event) => {
     const target: Element = event.target as Element;

@@ -1,4 +1,3 @@
-// openCloseCart.ts
 export const openCloseCart = () => {
   let cartIcon: Element | null = document.querySelector(".buyButton");
   let closeCart: Element | null = document.querySelector(".close");

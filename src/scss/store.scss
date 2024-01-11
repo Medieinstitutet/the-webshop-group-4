@@ -1,4 +1,3 @@
-
 @import 'reset';
 @import 'header';
 @import 'productContainer';
@@ -18,7 +17,6 @@ header {
   margin-left: 15px;
 }
 
-
 @media only screen and (max-width: 556px) {
   header {
     padding: 5px; 
@@ -32,7 +30,6 @@ header {
     
   }
 
-  
   .buy-button {
     font-size: 14px; 
   }

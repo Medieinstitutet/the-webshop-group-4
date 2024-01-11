@@ -1,10 +1,7 @@
-// displayProducts.ts
 import { Product } from "../models/Product";
 import { addToCart,updateCart } from "./cartFunctions";
 
-
 let cart: Product[] = [];
-
 
 export const displayProducts = (products: Product[]) => {
   const productListHTML = document.querySelector(".productList");

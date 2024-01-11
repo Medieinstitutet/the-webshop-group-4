@@ -1,4 +1,3 @@
-// showProductDetails.ts
 import { Product } from "../models/Product";
 
 export const showProductDetails = (selectedProduct: Product) => {

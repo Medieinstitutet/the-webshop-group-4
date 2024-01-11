@@ -38,17 +38,14 @@ document.addEventListener("click", (event: Event) => {
     );
 
     if (selectedProduct) {
-      // Explicitly type the addToCart function call
       addToCart(selectedProduct, cart);
       updateCart(cart);
     }
   }
 });
 
-
 const savedCart = localStorage.getItem("cart");
 cart = savedCart ? JSON.parse(savedCart) : [];
-
 
 increaseDecrease(cart);
 updateCart(cart);

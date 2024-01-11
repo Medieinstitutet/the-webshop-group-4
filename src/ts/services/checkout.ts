@@ -9,7 +9,6 @@ let cart: Product[] = [];
 const savedCart = localStorage.getItem("cart");
 cart = savedCart ? JSON.parse(savedCart) : [];
 
-// Display
 displayCheckout(cart);
 checkoutClick();
 (document.getElementById("checkoutForm") as HTMLFormElement).addEventListener(
