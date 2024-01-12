@@ -9,8 +9,7 @@ let cart: Product[] = [];
 const savedCart = localStorage.getItem("cart");
 cart = savedCart ? JSON.parse(savedCart) : [];
 
-displayCheckout(cart);
-checkoutClick();
+
 (document.getElementById("checkoutForm") as HTMLFormElement).addEventListener(
   "submit",
   function (event) {
@@ -22,3 +21,5 @@ checkoutClick();
     }
   }
 );
+displayCheckout(cart);
+checkoutClick();
