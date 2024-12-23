@@ -1,0 +1,60 @@
+@import 'variables';
+
+footer {
+  background-color: $white;
+  color: $black;
+  padding: 0px;
+  border-top: 5px solid $black;
+}
+
+.footer-container{
+  width: 100%;
+}
+
+.socialIcons{
+  display: flex;
+  justify-content: center;
+}
+
+.socialIcons a{
+  text-decoration: none;
+  padding: 5px;
+  background-color: #fff;
+  margin: 5px;
+  border-radius: 50px;
+}
+
+.socialIcons a i{
+  font-size: 1.5em;
+  color: black;
+  opacity: 0.9;
+}
+
+.socialIcons a:hover{
+  background-color: #111;
+  transition: 0.5s;
+}
+
+.socialIcons a:hover i{
+  color: white;
+  transition: 0.5s;
+}
+
+.footer-inf {
+  margin: 5px;
+}
+
+.footer-inf a{
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  color: black;
+  font-size: 0.5em;
+  font-weight: 800;
+}
+
+
+.footer-inf a:hover{
+  opacity: 1;
+}
+

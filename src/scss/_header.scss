@@ -1,0 +1,12 @@
+@import 'variables';
+
+header {
+  background-color: $white;
+  color: $black;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid $black;
+  height: 50px;
+}

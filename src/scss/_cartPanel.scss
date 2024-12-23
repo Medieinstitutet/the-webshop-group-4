@@ -1,0 +1,51 @@
+
+.cartPanel {
+  width: 300px;
+  background-color: lightgray;
+  color: white;
+  position: fixed;
+  inset: 0 -300px 0 auto;
+  display: grid;
+  grid-template-rows: 60px 1fr 60px;
+  transition: transform 0.5s;
+  z-index: 2;
+}
+
+.viewCart .cartPanel {
+  inset: 0 0 0 auto;
+}
+
+.viewCart .productContainer {
+  margin-right: 300px;
+}
+
+.cartPanel h1 {
+  margin: 0;
+  font-weight: 300;
+  text-align: center;
+  font-weight: 700;
+}
+
+.cartPanel .btn {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 50px;
+  width: 100%;
+}
+
+.cartPanel .btn button {
+  background-color: pink;
+  border: none;
+  cursor: pointer;
+  font-weight: 300;
+}
+
+.cartPanel .btn .close {
+  background-color: yellow;
+}
+
+.totalPriceSidebar {
+  text-align: right;
+  color: $black;
+  padding-right: 30px;
+}

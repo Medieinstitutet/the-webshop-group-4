@@ -1,0 +1,26 @@
+header .buyButton {
+  position: relative;
+}
+
+header .buyButton span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: red;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  top: 65%;
+  right: -5px;
+}
+
+.buyButton {
+  background-color:$black;
+  color: $white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+}

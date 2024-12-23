@@ -1,0 +1,38 @@
+.productList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin: 20px;
+}
+
+.productList .unit {
+  background-color: #eee;
+  padding: 10px;
+  height: 400px;
+}
+
+.productList .unit img {
+  width: 70%;
+}
+
+.productList .unit h2 {
+  font-weight: 500;
+  font-size: large;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.productList .unit .price {
+  letter-spacing: 5px;
+  font-size: small;
+}
+
+.productList .unit button {
+  background-color: black;
+  color: white;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
